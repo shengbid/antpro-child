@@ -20,6 +20,7 @@ export default defineConfig({
     siderWidth: 208,
     ...defaultSettings,
   },
+  // layout: false,
   // https://umijs.org/zh-CN/plugins/plugin-locale
   locale: {
     // default zh-CN
@@ -29,7 +30,7 @@ export default defineConfig({
     baseNavigator: true,
   },
   define: {
-    URL_PREFIX: '/childapi'
+    URL_PREFIX: '/childapi',
   },
   devServer: {
     port: 8091,
@@ -44,6 +45,7 @@ export default defineConfig({
   routes,
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
+    // 'root-entry-name': 'variable',
     'primary-color': defaultSettings.primaryColor,
   },
   // esbuild is father build tools
@@ -73,10 +75,10 @@ export default defineConfig({
     },
   ],
   nodeModulesTransform: { type: 'none' },
-  mfsu: {},
+  // mfsu: {},
   webpack5: {},
   exportStatic: {},
   qiankun: {
     slave: {},
-  }
+  },
 });

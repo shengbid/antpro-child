@@ -16,181 +16,191 @@
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    component: './Admin',
-    hideInMenu: true,
+    path: '/',
+    // layout: false,
+    // component: '../layouts/baseLayout',
+    menu: {
+      flatMenu: true,
+    },
     routes: [
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
+        path: '/',
+        redirect: '/welcome',
+      },
+      {
+        path: '/welcome',
+        name: 'welcome',
         icon: 'smile',
         component: './Welcome',
       },
-    ],
-  },
-  // {
-  //   name: 'list.table-list',
-  //   icon: 'table',
-  //   path: '/list',
-  //   component: './TableList',
-  // },
-  {
-    name: '全局数据流',
-    icon: 'profile',
-    path: '/data',
-    routes: [
       {
-        name: 'dva数据',
-        icon: 'table',
-        path: '/data/dva',
-        component: './dataManage/project',
-      },
-      {
-        name: 'initial数据',
-        icon: 'table',
-        path: '/data/initialstate',
-        component: './dataManage/initialstate',
-      },
-      {
-        name: 'useModel数据',
-        icon: 'table',
-        path: '/data/useModel',
-        component: './dataManage/useModel',
-      },
-    ]
-  },
-  {
-    path: '/table',
-    name: 'table',
-    icon: 'table',
-    routes: [
-      {
-        name: '表格合并',
-        icon: 'table',
-        path: '/table/spanTable',
-        component: './Table/spanTable',
-      },
-      {
-        name: 'tree表格',
-        icon: 'table',
-        path: '/table/treeTable',
-        component: './Table/treeTable',
-      },
-      {
-        name: '可编辑表格',
-        icon: 'table',
-        path: '/table/editProTable',
+        path: '/admin',
+        name: 'admin',
+        icon: 'crown',
+        access: 'canAdmin',
+        component: './Admin',
+        hideInMenu: true,
         routes: [
           {
-            path: '/table/editProTable',
-            redirect: '/table/editProTable/data'
+            path: '/admin/sub-page',
+            name: 'sub-page',
+            icon: 'smile',
+            component: './Welcome',
+          },
+        ],
+      },
+      // {
+      //   name: 'list.table-list',
+      //   icon: 'table',
+      //   path: '/list',
+      //   component: './TableList',
+      // },
+      {
+        name: '全局数据流',
+        icon: 'profile',
+        path: '/data',
+        routes: [
+          {
+            name: 'dva数据',
+            icon: 'table',
+            path: '/data/dva',
+            component: './dataManage/project',
+          },
+          {
+            name: 'initial数据',
+            icon: 'table',
+            path: '/data/initialstate',
+            component: './dataManage/initialstate',
+          },
+          {
+            name: 'useModel数据',
+            icon: 'table',
+            path: '/data/useModel',
+            component: './dataManage/useModel',
+          },
+        ],
+      },
+      {
+        path: '/table',
+        name: 'table',
+        icon: 'table',
+        routes: [
+          {
+            name: '表格合并',
+            icon: 'table',
+            path: '/table/spanTable',
+            component: './Table/spanTable',
+          },
+          {
+            name: 'tree表格',
+            icon: 'table',
+            path: '/table/treeTable',
+            component: './Table/treeTable',
           },
           {
             name: '可编辑表格',
             icon: 'table',
-            path: '/table/editProTable/data',
-            component: './editTable/editProTable',
+            path: '/table/editProTable',
+            routes: [
+              {
+                path: '/table/editProTable',
+                redirect: '/table/editProTable/data',
+              },
+              {
+                name: '可编辑表格',
+                icon: 'table',
+                path: '/table/editProTable/data',
+                component: './editTable/editProTable',
+              },
+              {
+                name: 'formitem验证表格',
+                icon: 'table',
+                path: '/table/editProTable/validate',
+                component: './editTable/validateTable',
+              },
+              {
+                name: '自定义编辑表格',
+                icon: 'table',
+                path: '/table/editProTable/custom',
+                component: './editTable/customTable',
+              },
+            ],
           },
           {
-            name: 'formitem验证表格',
+            name: 'select表格',
             icon: 'table',
-            path: '/table/editProTable/validate',
-            component: './editTable/validateTable',
+            path: '/table/select',
+            component: './Table/selectTable',
+          },
+        ],
+      },
+      {
+        path: '/editor',
+        name: '富文本编辑',
+        icon: 'BarsOutlined',
+        routes: [
+          {
+            name: '新增',
+            icon: 'table',
+            path: '/editor/add',
+            component: './editor/add',
           },
           {
-            name: '自定义编辑表格',
+            name: '列表',
             icon: 'table',
-            path: '/table/editProTable/custom',
-            component: './editTable/customTable',
-          }, 
-        ]
+            path: '/editor/list',
+            component: './editor/list',
+          },
+        ],
       },
       {
-        name: 'select表格',
-        icon: 'table',
-        path: '/table/select',
-        component: './Table/selectTable',
-      },
-    ],
-  },
-  {
-    path: '/editor',
-    name: '富文本编辑',
-    icon: 'BarsOutlined',
-    routes: [
-      {
-        name: '新增',
-        icon: 'table',
-        path: '/editor/add',
-        component: './editor/add',
+        name: '产品列表',
+        icon: 'BarsOutlined',
+        path: '/product/list',
+        component: './product/list',
       },
       {
-        name: '列表',
-        icon: 'table',
-        path: '/editor/list',
-        component: './editor/list',
-      },
-    ]
-  },
-  {
-    name: '产品列表',
-    icon: 'BarsOutlined',
-    path: '/product/list',
-    component: './product/list',
-  },
-  {
-    name: 'Form表单',
-    icon: 'form',
-    path: '/form',
-    routes: [
-      {
+        name: 'Form表单',
+        icon: 'form',
         path: '/form',
-        redirect: '/form/add'
+        routes: [
+          {
+            path: '/form',
+            redirect: '/form/add',
+          },
+          {
+            name: 'form表单',
+            icon: 'table',
+            path: '/form/add',
+            component: './product/addProduct',
+          },
+          {
+            name: 'debonceselect',
+            icon: 'table',
+            path: '/form/debonceselect',
+            component: './form/debounce',
+          },
+          {
+            name: 'upload上传',
+            icon: 'table',
+            path: '/form/upload',
+            component: './form/upload',
+          },
+          {
+            name: 'child详情页',
+            icon: 'table',
+            path: '/form/detail',
+            component: './form/detail',
+          },
+          {
+            name: 'child详情页2',
+            icon: 'table',
+            path: '/form/detail2',
+            component: './form/detail2',
+          },
+        ],
       },
-      {
-        name: 'form表单',
-        icon: 'table',
-        path: '/form/add',
-        component: './product/addProduct',
-      },
-      {
-        name: 'debonceselect',
-        icon: 'table',
-        path: '/form/debonceselect',
-        component: './form/debounce',
-      },
-      {
-        name: 'upload上传',
-        icon: 'table',
-        path: '/form/upload',
-        component: './form/upload',
-      },
-      {
-        name: 'child详情页',
-        icon: 'table',
-        path: '/form/detail',
-        component: './form/detail',
-      },
-      {
-        name: 'child详情页2',
-        icon: 'table',
-        path: '/form/detail2',
-        component: './form/detail2',
-      }
     ],
-  },
-  {
-    path: '/',
-    redirect: '/welcome',
   },
   {
     component: './404',
