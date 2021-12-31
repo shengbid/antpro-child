@@ -7,6 +7,8 @@ import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser, login } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import defaultSettings from '../config/defaultSettings';
+import { ConfigProvider } from 'antd';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -40,12 +42,16 @@ export async function getInitialState(): Promise<{
     return {
       fetchUserInfo,
       currentUser,
-      settings: {},
+      settings: {
+        ...defaultSettings
+      },
     };
   }
   return {
     fetchUserInfo,
-    settings: {},
+    settings: {
+      ...defaultSettings
+    },
   };
 }
 
@@ -102,16 +108,16 @@ export const request: RequestConfig = {
   },
 };
 
-
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   console.log(initialState)
-  const prop = {}
-  if (!isMenu) {
+  const prop = { }
+  if (!isMenu) { // 微服务不渲染菜单
     prop.menuRender = false
     prop.headerRender = false
-    prop.contentStyle = { margin: 0 }
-
+    prop.contentStyle = { 
+      margin: 0,
+    }
   }
   return {
     rightContentRender: () => <RightContent />,
@@ -135,6 +141,14 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
         history.push(loginPath);
       }
     },
+    childrenRender: (children) => {
+      // 如果是微服务渲染增加前缀
+      return (
+        <>
+          {!isMenu ? <ConfigProvider prefixCls="custom" iconPrefixCls="custom">{children}</ConfigProvider> : children}
+        </>
+      );
+    },
     links: isDev
       ? [
           <Link to="/umi/plugin/openapi" target="_blank">
@@ -151,7 +165,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     ...prop,
-    ...initialState?.settings,
   };
 };
 
@@ -169,10 +182,10 @@ export const qiankun = {
   },
   // 应用 render 之前触发
   async mount(props: any) {
-    console.log('app1 mount', props);
+    // console.log('app1 mount', props);
   },
   // 应用卸载之后触发
   async unmount(props: any) {
-    console.log('app1 unmount', props);
+    // console.log('app1 unmount', props);
   },
 }
